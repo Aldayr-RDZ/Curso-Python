@@ -7,17 +7,33 @@ conexion = sqlite3.connect('pruebas.db')
 cursor = conexion.cursor()
 
 #Crear tabla 
-cursor.execute("CREATE TABLE IF NOT EXISTS productos("+
-"id INTEGER PRIMARY KEY AUTOINCREMENT,"+
-"titulo varchar(255),"+
-"descripcion text,"+
-"precio int(255)"+
-")")
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS productos(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    titulo varchar(255),
+    descripcion text,
+    precio int(255)
+);
+""")
 
 #guardar cambios 
 conexion.commit()
 
-cursor.execute("INSERT INTO productos VALUES (null, 'segundo producto', 'descripcion del producto', 550)")
+# #insertar datos
+# cursor.execute("INSERT INTO productos VALUES (null, 'segundo producto', 'descripcion del producto', 550)")
+# conexion.commit()
+
+#eliminar datos 
+cursor.execute("DELETE FROM productos")
+conexion.commit()
+#insertar muchos registros de golpe 
+productos = [
+    ( "ordenador portatil", "buen PC", 700),
+    ( "teclado", "buen teclado", 200),
+    ( "camara portatil", "buea camara", 500),
+    ( "ordenador ", "PC", 400),
+]
+cursor.executemany("INSERT INTO productos VALUES (null, ?, ?, ?)", productos)
 conexion.commit()
 
 #listar datos 
