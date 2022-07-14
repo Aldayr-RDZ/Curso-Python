@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %} Página de pruebas {% endblock %}
+
+
+
+{% block content %}
+
+<h1 class="title">Página de mi Web</h1>
+<p>{{"Creado por Aldayr"|cut:" "}}</p>
+
+<p>{{texto|default:"no hay nada"}}</p>
+<p>{{lista|first}}</p>
+<p>{{lista|last}}</p>
+<p>{{lista|join:', '}}</p>
+<p>{{lista|length}}</p>
+<p>{{lista|random}}</p>
+
+<p>{{"texto pruebas"|length}}</p>
+<p>{{"texto pruebas"|upper}}</p>
+<p>{{"Texto Pruebas"|lower}}</p>
+
+<p>{{"<h1>texto de pruEbas</h1> <strong>Hola mundo</strong>"|striptags|lower}}</p>
+{% load filters %}
+{{" Aldayr "|saludo|safe}}
+{% endblock  %}

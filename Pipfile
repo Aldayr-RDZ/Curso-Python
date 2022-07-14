@@ -7,6 +7,9 @@ name = "pypi"
 psycopg2 = "*"
 sqlalchemy = "*"
 pillow = "*"
+django = "*"
+pylint-django = "*"
+django-ckeditor = "*"
 
 [dev-packages]
 

@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            {% block title %}
+
+
+            
+            {% endblock %}
+             
+            | Angel Aldayr
+        </title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    </head>
+
+    <body>
+        <!--Cabezera de la pagina -->
+        <header>
+            <div id="logotipo">
+                <!--Logo django-->
+                <img alt="imagen" src="{% static 'images/logo.png' %}" />
+                <h1>Proyecto con Django</h1>
+            </div>
+        </header>
+
+        <nav>
+            <ul>
+                
+                <li>
+                    <a href="{% url 'index' %}">Inicio</a>
+                </li>
+                {% if user.email %}
+                        <li>
+                            <a href="{% url 'list_articles' %}">Categorías</a>
+                            <ul>
+                                {% for category in categories  %}
+
+                                <li>
+                                    <a href="{% url 'category' category.0 %}">{{category.1}}</a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+
+                        </li>
+
+                        {% for page in pages  %}
+                            <li>
+                                <a href="{% url 'page' slug=page.2 %}">{{page.1}}</a>
+                            </li>
+                        {% endfor %}
+
+                        <li>
+                            <a href="{% url 'logout' %}">Cerrar sesión</a>
+                        </li>
+            
+
+                {% else %}
+                    <li>
+                        <a href="{% url 'register' %}">Registro</a>
+                    </li>
+                    
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        
+            <div class="barra">
+                <span class="esquina-izquierda"></span>
+                <span class="relleno-barra"></span>
+                <span class="esquina-derecha"></span>
+            </div>
+            
+        
+        
+            <div id="content">
+                <div class="box">
+                   
+                    {% block content %}
+
+                        <!--Codigo de templates -->
+                        <strong>Contendio del bloque original</strong>
+                    {% endblock %}
+                 </div>
+            </div>
+
+            
+        
+            <footer>
+                Master en Python &copy; Aldayr RDZ {% now "Y-m-d"%}
+            </footer>
+
+    </body>
+</html>
